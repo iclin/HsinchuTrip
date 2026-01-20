@@ -29,7 +29,7 @@
         // ▼▼▼ 請將您的 Firebase Config 貼在下方 ▼▼▼
         // =================================================================
         
-        // 🚨 注意：請確保這裡填入的是您從 Firebase Console 複製的真實資料
+       // 🚨 注意：請確保這裡填入的是您從 Firebase Console 複製的真實資料
         const firebaseConfig = {
             apiKey: "AIzaSyDQz_Zf7rWGoYD6iaVY1IjK3WL29bOL05E",
             authDomain: "myhsinchutrip.firebaseapp.com",
@@ -70,22 +70,22 @@
     </script>
 
     <script type="text/babel">
-        // 初始預設資料
+        // 初始預設資料 (已移除電話欄位)
         const INITIAL_DATA = {
             schedule: {
                 "1": [
-                    { "time": "11:30", "endTime": "13:30", "title": "午餐：常嚐料理廚房", "description": "已訂位。無菜單/家常料理，口味溫馨。", "location": "新竹市北區光華街102之3號", "type": "food", "notes": "4位大人 (程、儒、芳、呵)", "phone": "035311926", "googleMapLink": "https://www.google.com/maps/search/?api=1&query=常嚐料理廚房" },
-                    { "time": "13:45", "endTime": "15:30", "title": "下午茶：李克承博士故居 a-moom", "description": "日式古蹟改建，氛圍靜謐，適合聊天。招牌是生吐司與季節甜點。", "location": "新竹市北區勝利路199號", "type": "coffee", "notes": "距離午餐約8分鐘車程。", "phone": "035220352", "googleMapLink": "https://www.google.com/maps/search/?api=1&query=李克承博士故居+a-moom" },
-                    { "time": "16:00", "endTime": "17:30", "title": "Check-in：煙波都會館", "description": "辦理入住，稍微整理行李與休息。", "location": "新竹市東區民生路177號", "type": "hotel", "notes": "停車場位於飯店B1-B3。", "phone": "035427777", "googleMapLink": "https://www.google.com/maps/search/?api=1&query=煙波大飯店新竹都會館" },
-                    { "time": "17:30", "endTime": "18:00", "title": "分頭行動", "description": "呵：接小孩。\n其他：前往呵家。", "location": "移動中", "type": "transport", "notes": "", "phone": "", "googleMapLink": "" },
-                    { "time": "18:30", "endTime": "21:30", "title": "晚上聚會：呵的新家", "description": "串門子時間！", "location": "新竹市北區中山路431巷66號", "type": "home", "notes": "", "phone": "", "googleMapLink": "https://www.google.com/maps/search/?api=1&query=新竹市北區中山路431巷66號" }
+                    { "time": "11:30", "endTime": "13:30", "title": "午餐：常嚐料理廚房", "description": "已訂位。無菜單/家常料理，口味溫馨。", "location": "新竹市北區光華街102之3號", "type": "food", "notes": "4位大人 (程、儒、芳、呵)", "googleMapLink": "https://www.google.com/maps/search/?api=1&query=常嚐料理廚房" },
+                    { "time": "13:45", "endTime": "15:30", "title": "下午茶：李克承博士故居 a-moom", "description": "日式古蹟改建，氛圍靜謐，適合聊天。招牌是生吐司與季節甜點。", "location": "新竹市北區勝利路199號", "type": "coffee", "notes": "距離午餐約8分鐘車程。", "googleMapLink": "https://www.google.com/maps/search/?api=1&query=李克承博士故居+a-moom" },
+                    { "time": "16:00", "endTime": "17:30", "title": "Check-in：煙波都會館", "description": "辦理入住，稍微整理行李與休息。", "location": "新竹市東區民生路177號", "type": "hotel", "notes": "停車場位於飯店B1-B3。", "googleMapLink": "https://www.google.com/maps/search/?api=1&query=煙波大飯店新竹都會館" },
+                    { "time": "17:30", "endTime": "18:00", "title": "分頭行動", "description": "呵：接小孩。\n其他：前往呵家。", "location": "移動中", "type": "transport", "notes": "", "googleMapLink": "" },
+                    { "time": "18:30", "endTime": "21:30", "title": "晚上聚會：呵的新家", "description": "串門子時間！", "location": "新竹市北區中山路431巷66號", "type": "home", "notes": "", "googleMapLink": "https://www.google.com/maps/search/?api=1&query=新竹市北區中山路431巷66號" }
                 ],
                 "2": [
-                    { "time": "09:00", "endTime": "10:30", "title": "飯店早餐", "description": "Buffet 時間。", "location": "煙波大飯店", "type": "food", "notes": "", "phone": "", "googleMapLink": "" },
-                    { "time": "10:30", "endTime": "11:20", "title": "前往北埔", "description": "自駕前往。", "location": "路程約 40 分鐘", "type": "transport", "notes": "走台68線接台3線。", "phone": "", "googleMapLink": "https://www.google.com/maps/dir/煙波大飯店新竹都會館/北埔老街" },
-                    { "time": "11:30", "endTime": "12:30", "title": "客家擂茶", "description": "推薦：三十九號北埔擂茶", "location": "北埔老街", "type": "activity", "notes": "體驗磨茶樂趣。", "phone": "035803157", "googleMapLink": "https://www.google.com/maps/search/?api=1&query=三十九號北埔擂茶" },
-                    { "time": "12:30", "endTime": "14:00", "title": "老街午餐", "description": "粄條、鹹豬肉。", "location": "北埔老街", "type": "food", "notes": "", "phone": "", "googleMapLink": "" },
-                    { "time": "14:00", "endTime": "15:30", "title": "古蹟散步", "description": "金廣福公館、姜阿新洋樓。", "location": "北埔老街周邊", "type": "walk", "notes": "", "phone": "", "googleMapLink": "" }
+                    { "time": "09:00", "endTime": "10:30", "title": "飯店早餐", "description": "Buffet 時間。", "location": "煙波大飯店", "type": "food", "notes": "", "googleMapLink": "" },
+                    { "time": "10:30", "endTime": "11:20", "title": "前往北埔", "description": "自駕前往。", "location": "路程約 40 分鐘", "type": "transport", "notes": "走台68線接台3線。", "googleMapLink": "https://www.google.com/maps/dir/煙波大飯店新竹都會館/北埔老街" },
+                    { "time": "11:30", "endTime": "12:30", "title": "客家擂茶", "description": "推薦：三十九號北埔擂茶", "location": "北埔老街", "type": "activity", "notes": "體驗磨茶樂趣。", "googleMapLink": "https://www.google.com/maps/search/?api=1&query=三十九號北埔擂茶" },
+                    { "time": "12:30", "endTime": "14:00", "title": "老街午餐", "description": "粄條、鹹豬肉。", "location": "北埔老街", "type": "food", "notes": "", "googleMapLink": "" },
+                    { "time": "14:00", "endTime": "15:30", "title": "古蹟散步", "description": "金廣福公館、姜阿新洋樓。", "location": "北埔老街周邊", "type": "walk", "notes": "", "googleMapLink": "" }
                 ]
             },
             expenses: []
@@ -100,7 +100,6 @@
             Utensils: (p)=><svg {...p} width={p.size||18} height={p.size||18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>,
             Car: (p)=><svg {...p} width={p.size||18} height={p.size||18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M14 14h6"/></svg>,
             Info: (p)=><svg {...p} width={p.size||18} height={p.size||18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>,
-            Phone: (p)=><svg {...p} width={p.size||18} height={p.size||18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
             Users: (p)=><svg {...p} width={p.size||18} height={p.size||18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
             Moon: (p)=><svg {...p} width={p.size||18} height={p.size||18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
             Sun: (p)=><svg {...p} width={p.size||18} height={p.size||18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>,
@@ -406,7 +405,6 @@
                   location: "",
                   type: "scene",
                   notes: "",
-                  phone: "",
                   googleMapLink: ""
               };
               newData.schedule[day].push(newItem);
@@ -529,7 +527,6 @@
                                 {!isEditing && (
                                     <div className="flex space-x-2 mt-2">
                                         {item.googleMapLink && <a href={item.googleMapLink} target="_blank" rel="noreferrer" className="flex-1 bg-teal-600 hover:bg-teal-700 text-white text-center py-2 rounded-lg text-sm font-medium flex items-center justify-center transition-colors"><Icons.Navigation size={16} className="mr-1" />導航</a>}
-                                        {item.phone && <a href={`tel:${item.phone}`} className="flex-none bg-gray-100 hover:bg-gray-200 text-gray-700 p-2 rounded-lg transition-colors flex items-center justify-center"><Icons.Phone size={20} /></a>}
                                     </div>
                                 )}
                                 </div>
