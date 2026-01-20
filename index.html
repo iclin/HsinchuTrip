@@ -380,7 +380,45 @@
           const updateScheduleItem = (day, index, field, value) => {
             const newData = { ...data };
             newData.schedule[day][index][field] = value;
+            
+            // 自動更新導航連結
+            if (field === 'location') {
+                if (value && value.trim() !== "") {
+                    newData.schedule[day][index].googleMapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(value)}`;
+                } else {
+                    newData.schedule[day][index].googleMapLink = "";
+                }
+            }
+            
             saveData(newData);
+          };
+
+          const addScheduleItem = (day) => {
+              const newData = { ...data };
+              const newItem = {
+                  time: "12:00",
+                  endTime: "",
+                  title: "新行程",
+                  description: "請輸入說明",
+                  location: "",
+                  type: "scene",
+                  notes: "",
+                  phone: "",
+                  googleMapLink: ""
+              };
+              newData.schedule[day].push(newItem);
+              saveData(newData);
+              // 自動捲動到底部方便編輯
+              setTimeout(() => {
+                  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+              }, 100);
+          };
+
+          const deleteScheduleItem = (day, index) => {
+              if(!confirm("確定要刪除此行程嗎？")) return;
+              const newData = { ...data };
+              newData.schedule[day].splice(index, 1);
+              saveData(newData);
           };
 
           const updateExpenses = (newExpenses) => {
@@ -420,7 +458,7 @@
                 )}
               </div>
 
-              {isEditing && activeTab === 'schedule' && <div className="bg-orange-100 border-b border-orange-200 p-2 text-orange-800 text-xs text-center sticky top-[130px] z-10">✏️ 你的修改會自動同步給所有人</div>}
+              {isEditing && activeTab === 'schedule' && <div className="bg-orange-100 border-b border-orange-200 p-2 text-orange-800 text-xs text-center sticky top-[130px] z-10">✏️ 編輯模式：可修改內容、新增或刪除行程</div>}
 
               <div className="max-w-md mx-auto p-4">
                 {activeTab === 'money' && <ExpenseTracker expenses={data.expenses} travelers={travelers} onUpdateExpenses={updateExpenses} isSyncing={isSyncing}/>}
@@ -432,8 +470,19 @@
                             <div key={index} className="relative pl-6">
                             <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-teal-500 border-4 border-white shadow-sm"></div>
                             <div className={`bg-white rounded-xl shadow-sm border overflow-hidden transition-all ${isEditing ? 'border-orange-300 ring-1 ring-orange-100' : 'border-gray-100'}`}>
-                                <div className="p-4">
-                                <div className="flex justify-between items-start mb-2 space-x-2">
+                                <div className="p-4 relative">
+                                    
+                                {isEditing && (
+                                    <button 
+                                        onClick={() => deleteScheduleItem(activeDay, index)} 
+                                        className="absolute top-2 right-2 text-gray-300 hover:text-red-500 p-2"
+                                        title="刪除此行程"
+                                    >
+                                        <Icons.Trash size={18} />
+                                    </button>
+                                )}
+
+                                <div className="flex justify-between items-start mb-2 space-x-2 mr-6">
                                     <div className="flex items-center text-teal-700 font-bold text-lg w-full">
                                     <Icons.Clock className="mr-1 flex-shrink-0" size={16} />
                                     {isEditing ? (
@@ -447,16 +496,16 @@
                                     )}
                                     </div>
                                 </div>
-                                <h3 className="text-lg font-bold text-gray-900 mb-1 flex items-center">
-                                    {isEditing ? <input type="text" value={item.title} onChange={(e) => updateScheduleItem(activeDay, index, 'title', e.target.value)} className="edit-input font-bold"/> : item.title}
+                                <h3 className="text-lg font-bold text-gray-900 mb-1 flex items-center pr-6">
+                                    {isEditing ? <input type="text" value={item.title} onChange={(e) => updateScheduleItem(activeDay, index, 'title', e.target.value)} className="edit-input font-bold" placeholder="行程標題"/> : item.title}
                                 </h3>
                                 <div className="text-gray-600 text-sm mb-3 leading-relaxed whitespace-pre-line">
-                                    {isEditing ? <textarea value={item.description} onChange={(e) => updateScheduleItem(activeDay, index, 'description', e.target.value)} className="edit-input"/> : item.description}
+                                    {isEditing ? <textarea value={item.description} onChange={(e) => updateScheduleItem(activeDay, index, 'description', e.target.value)} className="edit-input" placeholder="行程說明"/> : item.description}
                                 </div>
                                 {(item.location && item.location !== "移動中" || isEditing) && (
                                     <div className="flex items-start text-xs text-gray-500 mb-3 bg-gray-50 p-2 rounded">
                                     <Icons.MapPin size={12} className="mr-1 mt-0.5 flex-shrink-0" />
-                                    {isEditing ? <input type="text" value={item.location} onChange={(e) => updateScheduleItem(activeDay, index, 'location', e.target.value)} className="edit-input bg-white text-xs" placeholder="地址"/> : item.location}
+                                    {isEditing ? <input type="text" value={item.location} onChange={(e) => updateScheduleItem(activeDay, index, 'location', e.target.value)} className="edit-input bg-white text-xs" placeholder="地址 (自動產生導航)"/> : item.location}
                                     </div>
                                 )}
                                 {!isEditing && (
@@ -470,6 +519,16 @@
                             </div>
                         ))}
                         </div>
+                        
+                        {isEditing && (
+                            <button 
+                                onClick={() => addScheduleItem(activeDay)}
+                                className="w-full py-3 bg-gray-100 border-2 border-dashed border-gray-300 text-gray-500 rounded-xl font-bold hover:bg-gray-50 hover:border-teal-300 hover:text-teal-600 transition flex items-center justify-center"
+                            >
+                                <Icons.Plus className="mr-2" />
+                                新增行程
+                            </button>
+                        )}
                     </div>
                 )}
               </div>
